@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="weixin.dao.UserOrderMapper" >
+  <resultMap id="BaseResultMap" type="weixin.model.UserOrder" >
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="oid" property="oid" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="weixin.model.UserOrder" >
+    insert into user_order (uid, oid)
+    values (#{uid,jdbcType=VARCHAR}, #{oid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="weixin.model.UserOrder" >
+    insert into user_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="oid != null" >
+        oid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="oid != null" >
+        #{oid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+   <delete id="deleteByOrderId" parameterType="java.lang.Integer" >
+    delete from user_order
+    where oid = #{id,jdbcType=INTEGER}
+  </delete>     
+  <delete id="deleteMoreByService" parameterType="list" >
+    delete from server_service
+    where serviceId in
+     <foreach collection="list" index="index" item="item" open="("
+    separator="," close=")">
+	   #{item}  
+	</foreach>
+  </delete>
+</mapper>

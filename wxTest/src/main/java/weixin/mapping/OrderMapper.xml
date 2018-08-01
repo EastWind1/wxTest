@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="weixin.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="weixin.model.Order" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="kind" property="kind" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="finishDate" property="finishdate" jdbcType="DATE" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="evaluation" property="evaluation" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, kind, description, price, finishDate, state, evaluation
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select distinct
+    <include refid="Base_Column_List" />
+    from allorder
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="get" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+        select distinct
+        allorder.id,allorder.name,allorder.kind,allorder.description,allorder.price,allorder.finishDate,allorder.state,allorder.evaluation,user.id as userId,user.name as userName
+        from allorder,user,user_order
+        where 1=1 and user.id=user_order.uid and allorder.id=user_order.oid
+        <if test="name != null">
+            and allorder.name like "%"#{name,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="kind != null">
+            and allorder.kind=#{kind,jdbcType=VARCHAR}
+        </if>
+            and allorder.state=1
+        <if test="id != null">
+            and allorder.id=#{id,jdbcType=VARCHAR}
+        </if>
+        order by allorder.id desc
+        <if test="pageIndex !=null">
+            limit #{pageIndex},#{rows}
+        </if>
+  </select>
+  <select id="getCount" resultType="int" parameterType="java.util.HashMap">
+        select 
+        count(distinct id)
+        from allorder
+        where 1=1 and allorder.state=1
+        <if test="name != null">
+            and name like "%"#{name,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="kind != null">
+            and kind=#{kind,jdbcType=VARCHAR}
+        </if>
+        <if test="id != null">
+            and id=#{id,jdbcType=VARCHAR}
+        </if>
+  </select>
+   <select id="getMy" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+ 		select distinct
+        allorder.id,allorder.name, allorder.kind, allorder.description, allorder.price, allorder.finishDate, allorder.state, allorder.evaluation
+        from allorder,user_order
+        where 1=1
+        	and allorder.id=user_order.oid
+        	and user_order.uid=#{uid,jdbcType=VARCHAR}
+        <if test="name != null">
+            and allorder.name like "%"#{name,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="kind != null">
+            and allorder.kind=#{kind,jdbcType=VARCHAR}
+        </if>
+        <if test="state != null">
+            and allorder.state=#{state,jdbcType=VARCHAR}
+        </if>
+        <if test="id != null">
+            and allorder.id=#{id,jdbcType=VARCHAR}
+        </if>
+        order by allorder.id desc
+        <if test="pageIndex !=null">
+            limit #{pageIndex},#{rows}
+        </if>
+  </select>
+  <select id="getMyCount" resultType="int" parameterType="java.util.HashMap">
+        select
+        count(distinct id)
+        from allorder,user_order
+        where 1=1
+        	and allorder.id=user_order.oid
+        	and user_order.uid=#{uid,jdbcType=VARCHAR}
+        <if test="name != null">
+            and allorder.name like "%"#{name,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="kind != null">
+            and allorder.kind=#{kind,jdbcType=VARCHAR}
+        </if>
+        <if test="state != null">
+            and allorder.state=#{state,jdbcType=VARCHAR}
+        </if>
+        <if test="id != null">
+            and allorder.id=#{id,jdbcType=VARCHAR}
+        </if>
+  </select>
+  <select id="serverGet" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select distinct
+        allorder.id, allorder.name, allorder.kind, allorder.description, allorder.price, allorder.finishDate, allorder.state, allorder.evaluation
+        from allorder,server_order
+        where 1=1
+        	and allorder.id=server_order.oid
+        	and server_order.sid=#{sid,jdbcType=VARCHAR}
+        <if test="name != null">
+            and allorder.name like "%"#{name,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="kind != null">
+            and allorder.kind=#{kind,jdbcType=VARCHAR}
+        </if>
+        <if test="state != null">
+            and allorder.state=#{state,jdbcType=VARCHAR}
+        </if>
+        <if test="id != null">
+            and allorder.id=#{id,jdbcType=VARCHAR}
+        </if>
+        order by allorder.id desc
+        <if test="pageIndex !=null">
+            limit #{pageIndex},#{rows}
+        </if>
+  </select>
+  <select id="serverGetCount" resultType="int" parameterType="java.util.HashMap">
+        select
+        count(distinct id)
+        from allorder,server_order
+        where 1=1
+        	and allorder.id=server_order.oid
+        	and server_order.sid=#{sid,jdbcType=VARCHAR}
+        <if test="name != null">
+            and allorder.name like "%"#{name,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="kind != null">
+            and allorder.kind=#{kind,jdbcType=VARCHAR}
+        </if>
+        <if test="state != null">
+            and allorder.state=#{state,jdbcType=VARCHAR}
+        </if>
+        <if test="id != null">
+            and allorder.id=#{id,jdbcType=VARCHAR}
+        </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from allorder
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="weixin.model.Order" useGeneratedKeys="true" keyProperty="id">
+    insert into allorder (id, name, kind, 
+      description, price, finishDate, 
+      state, evaluation)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{kind,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{finishdate,jdbcType=DATE}, 
+      #{state,jdbcType=VARCHAR}, #{evaluation,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="weixin.model.Order" useGeneratedKeys="true" keyProperty="id">
+    insert into allorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="kind != null" >
+        kind,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="finishdate != null" >
+        finishDate,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="evaluation != null" >
+        evaluation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="finishdate != null" >
+        #{finishdate,jdbcType=DATE},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluation != null" >
+        #{evaluation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="weixin.model.Order" >
+    update allorder
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        kind = #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="finishdate != null" >
+        finishDate = #{finishdate,jdbcType=DATE},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluation != null" >
+        evaluation = #{evaluation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="weixin.model.Order" >
+    update allorder
+    set name = #{name,jdbcType=VARCHAR},
+      kind = #{kind,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      finishDate = #{finishdate,jdbcType=DATE},
+      state = #{state,jdbcType=VARCHAR},
+      evaluation = #{evaluation,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+   <delete id="deleteMoreByPK" parameterType="list" >
+    delete from allorder
+    where id in
+     <foreach collection="list" index="index" item="item" open="("
+    separator="," close=")">
+	   #{item}  
+	</foreach>
+  </delete>
+</mapper>

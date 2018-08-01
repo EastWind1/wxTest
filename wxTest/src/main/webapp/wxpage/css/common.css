@@ -1,0 +1,144 @@
+body {
+  background: #fff;
+}
+.iconfont.default:before {
+  font-size: .45rem!important;
+}
+.my-header {
+  background-color: #5398f4;
+  height: .8rem;
+  line-height: .8rem;
+}
+.my-header .navbar-item {
+  color: #fff;
+}
+.my-header .navbar-item .back-ico:before,
+.my-header .navbar-item .next-ico:before {
+  color: #fff;
+}
+.my-header .navbar-item.nav-like i {
+  color: #fff;
+  display: block;
+  font-size: .35rem;
+  margin: 0 .05rem;
+}
+.my-header .navbar-item.default {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0;
+  -ms-flex: 0;
+  flex: 0;
+  min-width: 20%;
+}
+.my-header .navbar-center .navbar-title {
+  color: #fff;
+  font-size: .35rem;
+}
+.my-header .input-center {
+  width: 60%;
+}
+.my-header .index-input {
+  position: relative;
+}
+.my-header .index-input .icon-search {
+  position: absolute;
+  left: .1rem;
+  color: #7aaff7;
+}
+.my-header .index-input .index-right input {
+  height: .5rem;
+  line-height: .5rem;
+  background: #fff;
+  border: none;
+  width: 100%;
+  font-size: .2rem;
+  color: #999999;
+  padding-left: .5rem;
+  border-radius: .2rem;
+  -webkit-border-radius: .2rem;
+  -moz-border-radius: .2rem;
+  -ms-border-radius: .2rem;
+  -o-border-radius: .2rem;
+}
+.tabbar-item.tabbar-active {
+  color: #5398f4!important;
+}
+.cart-footer {
+  height: .7rem;
+  line-height: .7rem;
+  padding-left: .1rem;
+}
+.cart-footer h3 {
+  font-size: .2rem;
+  color: #000;
+}
+.cart-footer h3 span {
+  color: #58595b;
+  font-size: .17rem;
+  padding-right: .05rem;
+}
+.cart-footer h3 span em {
+  color: #e02e24;
+}
+.cart-footer .btn-primary {
+  width: 1rem;
+  background: #f8702d;
+  height: .7rem;
+  line-height: .7rem;
+  font-size: .25rem;
+  border-radius: 0;
+}
+.proi-footer {
+  padding: 0;
+  height: 1rem;
+}
+.proi-footer .footer-right {
+  width: 3.15rem;
+  height: 1rem;
+}
+.proi-footer .footer-right .btn-hollow {
+  height: 1rem;
+  line-height: 1rem;
+  font-size: .2rem;
+  color: #fff;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border: none;
+  border: 0;
+}
+.proi-footer .footer-right .btn-hollow.car {
+  background: #fa8300;
+}
+.proi-footer .footer-right .btn-hollow.sale {
+  background: #fc4749;
+}
+.proi-footer .footer-right .btn-hollow:after {
+  border: none;
+}
+.chat-footer {
+  background: #f8f8f8;
+  height: .9rem;
+  line-height: .9rem;
+  padding: 0 .18rem;
+}
+.chat-footer .footer-nl {
+  width: 100%;
+}
+.chat-footer .footer-nl input {
+  background: #fff;
+  border: 1px solid #e7e7e7;
+  padding-left: .1rem;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  height: .8rem;
+}
+.chat-footer .footer-nl .chat-button {
+  width: .5rem;
+  height: .5rem;
+  margin-left: .17rem;
+}

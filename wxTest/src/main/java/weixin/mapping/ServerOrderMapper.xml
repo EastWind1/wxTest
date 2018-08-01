@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="weixin.dao.ServerOrderMapper" >
+  <resultMap id="BaseResultMap" type="weixin.model.ServerOrder" >
+    <result column="sid" property="sid" jdbcType="VARCHAR" />
+    <result column="oid" property="oid" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="weixin.model.ServerOrder" >
+    insert into server_order (sid, oid)
+    values (#{sid,jdbcType=VARCHAR}, #{oid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="weixin.model.ServerOrder" >
+    insert into server_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="oid != null" >
+        oid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="oid != null" >
+        #{oid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+   <delete id="deleteByOid" parameterType="java.lang.Integer" >
+    delete from server_order
+    where oid = #{oid,jdbcType=INTEGER}
+  </delete>
+</mapper>
